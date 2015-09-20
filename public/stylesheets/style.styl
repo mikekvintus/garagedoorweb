@@ -5,7 +5,7 @@ a
   color: #00B7FF
 .closed
   background-color: green
-  display: inline
+  display: inline-block
 .notclosed
   background-color: red
   display: inline
@@ -15,3 +15,22 @@ a
 .notopened
   background-color: green
   display: inline
+button#openDoor, button#closeDoor
+	cursor:pointer
+	padding:5px 25px
+	background:#35b128
+	border:1px solid #33842a
+	-moz-border-radius: 10px
+	-webkit-border-radius: 10px
+	border-radius: 10px
+	-webkit-box-shadow: 0 0 4px rgba(0,0,0, .75)
+	-moz-box-shadow: 0 0 4px rgba(0,0,0, .75)
+	box-shadow: 0 0 4px rgba(0,0,0, .75)
+	color:#f3f3f3
+	font-size:2.1em
+
+button#openDoor:hover, button#openDoor:focus, button#closeDoor:hover, button#closeDoor:focus
+	background-color :#399630
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75)
+	-moz-box-shadow: 0 0 1px rgba(0,0,0, .75)
+	box-shadow: 0 0 1px rgba(0,0,0, .75)
