@@ -1,0 +1,23 @@
+{
+  "name": "garagedoorweb",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mikekvintus/garagedoorweb",
+  "authors": [
+    "Mike Kvintus <mikekvintus@gmail.com>"
+  ],
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "spark": "~1.0.0"
+  }
+}

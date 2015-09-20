@@ -1,5 +1,94 @@
 extends layout
 
+block scripts
+  script(type='text/javascript' src='bower_components/spark/dist/spark.min.js')
+  script(type='text/javascript').
+    spark.login({accessToken: '#{SPARK_TOKEN}'});
+    var photon;
+    spark.getDevice('#{PHOTON_DEVICE_ID}', function(err, photon2) {
+      photon = photon2;
+      if (err) {
+        console.log('An error occurred while getting device:', err);
+      } else {
+        console.log('Device name: ' + photon.name);
+        updateDoorStatus(photon);
+        photon.onEvent('doorStatusChg', function(data) {
+          updateDoorStatus(photon);
+        });
+      }
+    });
+
+    function updateDoorStatus(photon) {
+        photon.getVariable('isOpen', function(err, data) {
+          if (err) {
+            console.log('An error occurred while getting isOpen:', err);
+          } else {
+            setDoorOpen(data.result);
+          }
+        });
+        photon.getVariable('isClosed', function(err, data) {
+          if (err) {
+            console.log('An error occurred while getting isClosed:', err);
+          } else {
+            setDoorClosed(data.result);
+          }
+        });
+    }
+
+    function setDoorOpen(isOpen) {
+      if (isOpen == 1) {
+        console.log('Garage door is open');
+        document.getElementById("isopen").className = 'opened';
+        document.getElementById("isopen").innerHTML = 'Yes';
+        document.getElementById("closeDoor").style.display = 'inline';
+      } else {
+        console.log('Garage door is not open');
+        document.getElementById("isopen").className = 'notopened';
+        document.getElementById("isopen").innerHTML = 'No';
+        document.getElementById("closeDoor").style.display = 'none';
+      }
+    }
+
+    function setDoorClosed(isClosed) {
+      if (isClosed == 1) {
+        console.log('Garage door is closed');
+        document.getElementById("isclosed").className = 'closed';
+        document.getElementById("isclosed").innerHTML = 'Yes';
+        document.getElementById("openDoor").style.display = 'inline';
+      } else {
+        console.log('Garage door is not closed');
+        document.getElementById("isclosed").className = 'notclosed';
+        document.getElementById("isclosed").innerHTML = 'No';
+        document.getElementById("openDoor").style.display = 'none';
+      }
+    }
+
+    function opendoor() {
+      console.log('Opening garage door');
+      photon.callFunction('controlDoor', 'open', function(err, data) {
+        if (err) {
+          console.log('An error occurred while opening garage door:', err);
+        }
+      });
+    }
+
+    function closedoor() {
+      console.log('Closing garage door');
+      photon.callFunction('controlDoor', 'close', function(err, data) {
+        if (err) {
+          console.log('An error occurred while closing garage door:', err);
+        }
+      });
+    }
+
 block content
   h1= title
-  p Welcome to #{title}
+  p Is Garage door closed?  
+    .closed#isclosed
+     | Yes
+  p Is Garage door open?  
+    .opened#isopen
+     | Yes
+
+  button#openDoor(onClick="opendoor();") Open Garage Door
+  button#closeDoor(onClick="closedoor();") Close Garage Door

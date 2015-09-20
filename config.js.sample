@@ -1,0 +1,6 @@
+var config = {};
+
+config.SPARK_TOKEN = 'PUT_SPARK_TOKEN_HERE';
+config.PHOTON_DEVICE_ID = 'PUT_PHOTON_DEVICE_ID_HERE';
+
+module.exports = config;

@@ -5,3 +5,19 @@ body {
 a {
   color: #00b7ff;
 }
+.closed {
+  background-color: #008000;
+  display: inline;
+}
+.notclosed {
+  background-color: #f00;
+  display: inline;
+}
+.opened {
+  background-color: #f00;
+  display: inline;
+}
+.notopened {
+  background-color: #008000;
+  display: inline;
+}
