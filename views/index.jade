@@ -19,6 +19,9 @@ block scripts
     });
 
     function updateDoorStatus(photon) {
+        document.getElementById("isopen").style.display = 'none';
+        document.getElementById("isclosed").style.display = 'none';
+        document.getElementById("neither").style.display = 'inline';
         photon.getVariable('isOpen', function(err, data) {
           if (err) {
             console.log('An error occurred while getting isOpen:', err);
@@ -39,13 +42,12 @@ block scripts
       if (isOpen == 1) {
         console.log('Garage door is open');
         document.getElementById("isopen").className = 'opened';
-        document.getElementById("isopen").innerHTML = 'Yes';
-        document.getElementById("closeDoor").style.display = 'inline';
+        document.getElementById("isopen").style.display = 'inline';
+        document.getElementById("neither").style.display = 'none';
       } else {
         console.log('Garage door is not open');
         document.getElementById("isopen").className = 'notopened';
-        document.getElementById("isopen").innerHTML = 'No';
-        document.getElementById("closeDoor").style.display = 'none';
+        document.getElementById("isopen").style.display = 'none';
       }
     }
 
@@ -53,13 +55,12 @@ block scripts
       if (isClosed == 1) {
         console.log('Garage door is closed');
         document.getElementById("isclosed").className = 'closed';
-        document.getElementById("isclosed").innerHTML = 'Yes';
-        document.getElementById("openDoor").style.display = 'inline';
+        document.getElementById("isclosed").style.display = 'inline';
+        document.getElementById("neither").style.display = 'none';
       } else {
         console.log('Garage door is not closed');
         document.getElementById("isclosed").className = 'notclosed';
-        document.getElementById("isclosed").innerHTML = 'No';
-        document.getElementById("openDoor").style.display = 'none';
+        document.getElementById("isclosed").style.display = 'none';
       }
     }
 
@@ -83,12 +84,12 @@ block scripts
 
 block content
   h1= title
-  p Is Garage door closed?  
-    span.closed#isclosed
-     | Yes
-  p Is Garage door open?  
-    span.opened#isopen
-     | Yes
+  .notclosed#isclosed
+    p Garage is door closed
+    button#openDoor(onClick="opendoor();") Open Garage Door
+  .notopened#isopen
+    p Garage door is open  
+    button#closeDoor(onClick="closedoor();") Close Garage Door
+  .notclosed#neither
+    p Garage door is not all the way opened or closed
 
-  button#openDoor(onClick="opendoor();") Open Garage Door
-  button#closeDoor(onClick="closedoor();") Close Garage Door

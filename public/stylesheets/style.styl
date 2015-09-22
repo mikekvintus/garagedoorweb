@@ -3,18 +3,29 @@ body
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 a
   color: #00B7FF
+.closed p
+  background-color: green
+  font-size:1.5em
 .closed
-  background-color: green
   display: inline-block
+.notclosed p
+  background-color: white
+  font-size:1.5em
 .notclosed
+  display: none
+.opened p
   background-color: red
-  display: inline
+  font-size:1.5em
 .opened
-  background-color: red
   display: inline
+.notopened p
+  background-color: white
+  font-size:1.5em
 .notopened
-  background-color: green
-  display: inline
+  display: none
+.neither p
+  background-color: orange
+  font-size:1.5em
 button#openDoor, button#closeDoor
 	cursor:pointer
 	padding:5px 25px
